@@ -16,7 +16,7 @@ public class MainGame {
                 int xPosition=(screenWidth-gameWidth)/2;
                 int yPosition=(screenHeight-gameHeight)/2;
                 
-                GameWindow gw = new GameWindow(gameWidth, gameHeight, xPosition, yPosition);
+                GWindow gw = new GWindow(gameWidth, gameHeight, xPosition, yPosition);
                 
                 
 	}

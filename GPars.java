@@ -5,19 +5,28 @@ import javax.swing.ImageIcon;
 
 public class GPars {
     static Image cursorImage;
+    static int MoveMODE;
+    static boolean pause=false;
+    static boolean end;
+    static boolean levelPause=false;
+    static Image bgImage;
+    static int NO_LEVELS;
+    public static int gameWidth=1024;
+    public static int gameHeight=768;
 
 	//public static Image cursorImage;
 
-	public static void loadInitialImages() {
-		// TODO Auto-generated method stub
-		cursorImage=loadImage("images/kursor2.png");
-	}
+    public static long startTime;
+    public static double levelTime;
+    
 
-    private static Image loadImage(String fileName) {
+   public static void loadInitialImages() {
+                cursorImage=loadImage("images/kursor1.png");
+                bgImage=loadImage("images/tlo1.png");
         
-        return new ImageIcon(fileName).getImage();
-        
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+static Image loadImage(String fileName) {
+               return new ImageIcon(fileName).getImage();
+    }
 }
