@@ -4,16 +4,18 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class GPars {
-    static Image cursorImage;
-    static int MoveMODE;
-    static boolean pause=false;
-    static boolean end;
-    static boolean levelPause=false;
-    static Image bgImage;
-    static int NO_LEVELS;
+    public static Image cursorImage;
+    public static int MoveMODE=1;
+    public static boolean pause=false;
+    public static boolean end;
+    public static boolean levelPause=false;
+    public static Image bgImage;
+    public static int NO_LEVELS;
     public static int gameWidth=1024;
     public static int gameHeight=768;
-
+    public static int nobj=12;
+    public static Image bubbleIm;
+    
 	//public static Image cursorImage;
 
     public static long startTime;
@@ -22,7 +24,8 @@ public class GPars {
 
    public static void loadInitialImages() {
                 cursorImage=loadImage("images/kursor1.png");
-                bgImage=loadImage("images/tlo1.png");
+                bgImage=loadImage("images/tlo2.jpg");
+                bubbleIm=loadImage("images/bąbelek.png");
         
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

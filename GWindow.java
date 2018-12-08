@@ -25,7 +25,7 @@ class GWindow extends JFrame {
         setLocation(xPosition, yPosition);
         setResizable(false);
         setUndecorated(true);
-        interf(gameWidth, gameHeight);
+        initGUI(gameWidth, gameHeight);
         setVisible(true);
         animationLoop();
         
@@ -33,20 +33,21 @@ class GWindow extends JFrame {
      //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void interf(int gameWidth, int gameHeight) {
+    private void initGUI(int gameWidth, int gameHeight) {
         
         setLayout(new GridLayout(1,1));
         GPars.loadInitialImages();
         Toolkit tk=Toolkit.getDefaultToolkit();
-        Cursor tCursor=tk.createCustomCursor(GPars.cursorImage, new Point(30,30) , "Target Cursor");
+        Cursor tCursor;
+        tCursor = tk.createCustomCursor(GPars.cursorImage, new Point(30,30) , "Target Cursor");
         setCursor(tCursor);
         add(new GamePanel(gameWidth,gameHeight));
         
- // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void animationLoop() {
-//       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  //     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

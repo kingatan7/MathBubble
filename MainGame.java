@@ -8,7 +8,7 @@ public class MainGame {
 		// TODO Auto-generated method stub
 		
                 int gameWidth=1024;
-                int gameHeight=768;
+                int gameHeight=700;
                 
                 int screenWidth=Toolkit.getDefaultToolkit().getScreenSize().width;
                 int screenHeight=Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -19,6 +19,7 @@ public class MainGame {
                 GWindow gw = new GWindow(gameWidth, gameHeight, xPosition, yPosition);
                 
                 
+             
 	}
 
 }
