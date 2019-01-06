@@ -9,10 +9,10 @@ package kingatan;
  *
  * @author DELL
  */
-class GameStatus{
+public class GameStatus{
     
-    public int points;
-    public int level;
+    public static int points;
+    public static int level=1;
     public double time;
     
     public void reset() {
@@ -20,6 +20,10 @@ class GameStatus{
     points=0;
     level=1;
     time=0.0;
+
+    MathBubble.ilosc_poprawnych=0;
+    MathBubble.ilosc_niepoprawnych=0;
+    
     
  //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
@@ -29,6 +33,10 @@ class GameStatus{
     }
     public void nastLevel(){
         level++;
+        MathBubble.ilosc_poprawnych=0;
+        MathBubble.ilosc_niepoprawnych=0;
+        MathBubble.losuj();
+        
     }
     
 }
