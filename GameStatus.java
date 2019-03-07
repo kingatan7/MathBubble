@@ -6,31 +6,37 @@
 package kingatan;
 
 /**
- *
- * @author DELL
+ * Klasa reprezntująca aktualny stan gry
+ * @author Kinga Tańska
  */
 public class GameStatus{
-    
+    /* aktualna ilość punktów */
     public static int points;
+    /* aktualny level gry */
     public static int level=1;
-    public double time;
     
+    /** 
+     * Zerowanie parametrów gry
+     */
     public void reset() {
     
     points=0;
     level=1;
-    time=0.0;
 
     MathBubble.ilosc_poprawnych=0;
     MathBubble.ilosc_niepoprawnych=0;
+    MathBubble.suma_pkt=0;
     
-    
- //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
     }
+    /**
+     * Zerowanie punktów przed staretem gry
+     */
     public void ResetPoints(){
         points=0;
     }
+    /**
+     * Zmiana levelu, wywołanie metody losującej nowe działania
+     */
     public void nastLevel(){
         level++;
         MathBubble.ilosc_poprawnych=0;

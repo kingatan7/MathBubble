@@ -12,12 +12,19 @@ import javax.swing.JFrame;
 import java.awt.Point;
 
 /**
- *
- * @author DELL
+ * Okno gry, klasa dziedzicząca po JFrame
+ * @author Kinga Tańska
  */
 class GWindow extends JFrame {
     
-
+    /**
+     * Konstruktor klasy odpwiada za stworzenie okna i jego widoczność
+     * @param gameWidth wysokość okna
+     * @param gameHeight szerokość okna
+     * @param xPosition położenie na osi x
+     * @param yPosition  położenie na osi y
+     */
+    
     public GWindow(int gameWidth, int gameHeight, int xPosition, int yPosition) {
         
         super();
@@ -27,12 +34,14 @@ class GWindow extends JFrame {
         setUndecorated(true);
         initGUI(gameWidth, gameHeight);
         setVisible(true);
-        animationLoop();
         
-        
-     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /** 
+     * Utworzenie interfejsu graficznego użytkownika
+     * @param gameWidth szerokość pola
+     * @param gameHeight wysokość pola
+     */
     private void initGUI(int gameWidth, int gameHeight) {
         
         setLayout(new GridLayout(1,1));
@@ -42,14 +51,7 @@ class GWindow extends JFrame {
         tCursor = tk.createCustomCursor(GPars.cursorImage, new Point(30,30) , "Target Cursor");
         setCursor(tCursor);
         add(new GamePanel(gameWidth,gameHeight));
-        
-//  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
-    private void animationLoop() {
-  //     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
 }

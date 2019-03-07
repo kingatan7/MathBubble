@@ -12,37 +12,44 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 /**
- *
+ * Klasa tworząca działania
+ * na różnych poziomach trudności
  * @author DELL
  */
 public class MathBubble {
+    /* działania w formie napisu, przygotowane do wyświetlenia */
     public static String[] wynik = {"","","","","","","","","","","",""};
+    /* zmienna określająca popraność działania */
     public static int czy_poprawne;
-    public static boolean hit; //czy trafiono bąbelek
+    /* status działania: 0-poprawne, 1-niepoprawne, 2-kliknięte i jest za nie punkt, 3-kliknięte bez punktu */
     public static int czy_w[];
-    
+    /* zmienna reprezentująca liczbę wchodzącą w działanie */
     public static int a;
+    /* zmienna reprezentująca liczbę wchodzącą w działanie */
     public static int b;
+    /* zmienna obliczona jako wynik działania */
     public static int suma;
+    /* zmienna obliczona jako wynik działania */
     public static int roznica;
+    /* zmienna obliczona jako wynik działania */
     public static int iloczyn;
-    public static int iloraz;
-
+    /* ilość poprawnych działań dla poziomu */
     public static int ilosc_poprawnych=0;
+    /* ilość niepoprawnych działań dla poziomu */
     public static int ilosc_niepoprawnych=0;
-
+    /* ilość punktów - ilość niepoprawnych działań w całej grze */
     public static int suma_pkt;
-    
+    /* współrzędna kliknięcia */
     public static int x1=GamePanel.wspol1;
+    /* współrzędna kliknięcia */
     public static int y2=GamePanel.wspol2;
- 
+    /* ilość żyć w całej grze */
     public static int ilosc_zyc=3;
     
-    public MathBubble(){
-        hit=false;
-
-    }
-
+    
+    /**
+     * Metoda losująca działania w zależności od poziomu gry
+     */
 
 public static void losuj(){
 
@@ -52,35 +59,39 @@ public static void losuj(){
         for(int i=0;i<12;i++){
             Random rand=new Random();
             czy_poprawne=rand.nextInt(2);
+            
             if(GameStatus.level==1){
+                
             a=rand.nextInt(50)+1;
             b=rand.nextInt(50)+1;
+            
                 if(czy_poprawne==1){
                 suma=a+b;
                 ilosc_poprawnych++;
-                suma_pkt++;
                 czy_w[i]=0;
                 }
                 else {
                 suma=a+b+rand.nextInt(20)+10;
                 ilosc_niepoprawnych++;
+                suma_pkt++;
                 czy_w[i]=1;
                 }
             }
+            
             else if(GameStatus.level==2){
             a=rand.nextInt(50);
             b=rand.nextInt(50);
                 if(czy_poprawne==1){
                     if(a>=b)roznica=a-b;
-                    else roznica=b-a;
+                    if (b>a) roznica=b-a;
                 ilosc_poprawnych++;
-                suma_pkt++;
                 czy_w[i]=0;
                 }
                 else {
-                if(a>=b)roznica=a-b-rand.nextInt(5)+5;
-                else roznica=b-a-rand.nextInt(5)+5;
+                if(a>=b)roznica=a-b-(rand.nextInt(5)+5);
+                if (b>a) roznica=b-a-(rand.nextInt(5)+5);
                 ilosc_niepoprawnych++;
+                suma_pkt++;
                 czy_w[i]=1;
                 }
             }
@@ -90,12 +101,12 @@ public static void losuj(){
                 if(czy_poprawne==1){
                     iloczyn=a*b;
                     ilosc_poprawnych++;
-                    suma_pkt++;
                     czy_w[i]=0;
                 }
                 else{
                     iloczyn=(a*b)+rand.nextInt(5)+2;
                     ilosc_niepoprawnych++;
+                    suma_pkt++;
                     czy_w[i]=1;
                 }      
             }
@@ -105,12 +116,12 @@ public static void losuj(){
             if(czy_poprawne==1){
                 suma=a+b;
                 ilosc_poprawnych++;
-                suma_pkt++;
                 czy_w[i]=0;
             }
             else{
                 suma=(a+b)+rand.nextInt(5)+2;
                 ilosc_niepoprawnych++;
+                suma_pkt++;
                 czy_w[i]=1;
             }
             }
@@ -138,68 +149,40 @@ public static void losuj(){
                     String str3=Integer.toString(suma);
                     wynik[i]=str1+" + "+str2+ " = "+str3;
                 }
-                
         }
-        
-        System.out.println("ilosc poprawnych: "+ilosc_poprawnych);
-        System.out.println("suma: "+suma_pkt);
-        
 } 
-/*
-   public static boolean containsPoint(int x, int y) {
+ /**
+  * metoda sprawdzająca czy kliknięty jest wyłącznie obszar bąbelka
+  * @param x współrzędna kliknięcia
+  * @param y współrzędna kliknięcia
+  * @return 1 gdy tak, 0 gdy nie
+  */
+  public static boolean containsPoint(int x, int y) {
        for(int i=0;i<12;i++){
       for(y2=30;y2<900;y2=(y2+GamePanel.odleglosc)){
         for(x1=100;x1<900;x1=(x1+GamePanel.odleglosc)){
         if(x>=x1 && x<(x1+150)){
             if(y>=y2 && y<(y2+150)){
-                if(czy_w[i]==1){
-                 czy_w[i]=2;
-          playSound(new File("sounds/tap-crisp.aif"));
-          ilosc_niepoprawnych--;
                 return true;
-                }
-                else{
-                    czy_w[i]=3;
-                    return false;
-                }
+                        }
+                    }
+                } 
             }
         } 
-     }
-   }
-       }
-return false;
-       
+    return false;
     }
-   */
+   
+
+/** 
+ * metoda sprawdzająca czy kliknięto poprawne czy niepoprawne działanie
+ * zmieniająca parametr czy_w, dodająca punkty w zależności od kliknięcia
+ * odtwarzająca dźwięk w zależności czy punkt był przyznany czy nie
+ * @param x współrzędna kliknięcia
+ * @param y współrzędna kliknięcia
+ * @return 1 gdy przyznany punkt, 0 gdy nie
+ */
    public static boolean czy_wynik(int x, int y){
-       int i = (y/200)*4 + (x/250);
-       if (i < 0) i=0;
-       if(i > 11) i =11;
-        if(czy_w[i]==1){
-          czy_w[i]=2;
-          playSound(new File("sounds/tap-crisp.aif"));
-          ilosc_niepoprawnych--;
-          return true;
-          }
-          else{
-              czy_w[i]=3;
-              ilosc_zyc--;
-              playSound(new File("sounds/slide-magic.aif"));
-          }
-       
-     /*  for(int i=0;i<12;i++){
-           for(x=0;x<1000;x+=250){
-               for(y=0;y<600;y+=200){
-                   if(czy_w[i]==1)
-          czy_w[0]=2;
-          playSound(new File("sounds/tap-crisp.aif"));
-          ilosc_niepoprawnych--;
-          return true;
-               }
-           }
-       }
-       
-       
+
       if(x<250 && y<200) {
           if(czy_w[0]==1){
           czy_w[0]=2;
@@ -356,10 +339,13 @@ return false;
               playSound(new File("sounds/slide-magic.aif"));
           }
       }
-          */     
+             
       return false;
    }
-
+   /**
+    * Funkcja służąca do odtworzenia dźwięku z pliku
+    * @param f plik dźwiękowy -  obiekt klasy File
+    */
 
    public static synchronized void playSound(final File f){
        new Thread(new Runnable(){
@@ -377,11 +363,4 @@ return false;
            }
        }).start();
    }
-  
-
-} 
-    
-
-       
-       
-    
+}
